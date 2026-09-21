@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lost &amp; Found Treasures — Antique Store in Boston, MA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #241f1a;
+    --ink-soft: #4a4038;
+    --paper: #f1e7d3;
+    --paper-2: #e7d8b2;
+    --paper-3: #ddc994;
+    --green: #23402f;
+    --green-deep: #17281d;
+    --brass: #a97a3f;
+    --brass-light: #c99b5f;
+    --rust: #92402a;
+    --line: rgba(36, 31, 26, 0.18);
+    --shadow: rgba(23, 18, 12, 0.28);
+    --radius-tag: 3px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #ece2cd;
+      --ink-soft: #cabfa8;
+      --paper: #1c1712;
+      --paper-2: #241d16;
+      --paper-3: #2c2318;
+      --green: #6f9c82;
+      --green-deep: #0f1a13;
+      --brass: #d3a262;
+      --brass-light: #e6bd7f;
+      --rust: #d1806a;
+      --line: rgba(236, 226, 205, 0.16);
+      --shadow: rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #ece2cd;
+    --ink-soft: #cabfa8;
+    --paper: #1c1712;
+    --paper-2: #241d16;
+    --paper-3: #2c2318;
+    --green: #6f9c82;
+    --green-deep: #0f1a13;
+    --brass: #d3a262;
+    --brass-light: #e6bd7f;
+    --rust: #d1806a;
+    --line: rgba(236, 226, 205, 0.16);
+    --shadow: rgba(0, 0, 0, 0.55);
+  }
+  * { box-sizing: inherit; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(169,122,63,0.07), transparent 40%),
+      radial-gradient(circle at 85% 92%, rgba(35,64,47,0.06), transparent 45%);
+  }
+  h1, h2, h3, .display {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  a { color: inherit; }
+  img, svg { max-width: 100%; display: block; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .measure { max-width: 62ch; }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding-top: env(safe-area-inset-top, 0px);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 16px;
+  }
+  .brandmark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Fraunces", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .brandmark svg { width: 30px; height: 30px; flex: none; }
+  .nav-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rust); flex: none; }
+  .dot.open { background: var(--green); }
+  .btn-call {
+    border: 1px solid var(--ink);
+    padding: 7px 14px;
+    border-radius: var(--radius-tag);
+    font-size: 0.92rem;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 64px 0 56px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .kicker-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--brass);
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+  }
+  .stars { display: inline-flex; gap: 2px; }
+  .stars svg { width: 15px; height: 15px; fill: var(--brass); }
+  h1.shop-name {
+    font-size: clamp(2.6rem, 5.4vw, 4.1rem);
+    line-height: 0.98;
+    margin-bottom: 18px;
+  }
+  .hero p.lede {
+    color: var(--ink-soft);
+    font-size: 1.12rem;
+    max-width: 46ch;
+    margin-bottom: 28px;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 30px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: var(--radius-tag);
+    font-size: 0.98rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--green); color: var(--paper); }
+  .btn-secondary { border-color: var(--ink); color: var(--ink); }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    padding: 6px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    background: color-mix(in srgb, var(--paper) 60%, var(--paper-2));
+  }
+  .badge svg { width: 13px; height: 13px; fill: var(--green); flex: none; }
+
+  /* hanging sign illustration */
+  .sign-wrap { position: relative; display: flex; justify-content: center; }
+  .sign-wrap svg { width: 100%; max-width: 360px; height: auto; }
+
+  /* ---------- Section framing ---------- */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head { margin-bottom: 34px; max-width: 56ch; }
+  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); }
+  .section-head p { color: var(--ink-soft); margin-top: 10px; }
+
+  /* ---------- About / services ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 52px;
+    align-items: start;
+  }
+  .about-grid p + p { margin-top: 14px; }
+  .services-panel {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    padding: 26px 26px 22px;
+    border-radius: 2px;
+  }
+  .services-panel h3 {
+    font-size: 1.05rem;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--brass);
+  }
+  .services-list { list-style: none; margin: 0; padding: 0; }
+  .services-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-top: 1px dashed var(--line);
+    font-size: 0.98rem;
+  }
+  .services-list li:first-child { border-top: none; }
+  .services-list svg { width: 17px; height: 17px; margin-top: 3px; fill: var(--green); flex: none; }
+
+  /* ---------- Hours ledger ---------- */
+  .hours-panel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+  }
+  table.ledger { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  table.ledger td { padding: 11px 4px; border-bottom: 1px solid var(--line); }
+  table.ledger td:first-child { font-family: "Fraunces", serif; font-weight: 500; }
+  table.ledger td:last-child { text-align: right; color: var(--ink-soft); }
+  table.ledger tr.today td { color: var(--green); font-weight: 600; }
+  table.ledger tr.today td:last-child { color: var(--green); }
+  .visit-card {
+    border: 1px solid var(--line);
+    padding: 22px;
+    background: var(--paper-2);
+    font-size: 0.95rem;
+    min-width: 230px;
+  }
+  .visit-card .label { font-family: "Fraunces", serif; font-style: italic; color: var(--brass); margin-bottom: 4px; }
+  .visit-card .field { margin-bottom: 16px; }
+  .visit-card .field:last-child { margin-bottom: 0; }
+
+  /* ---------- Reviews ---------- */
+  .rating-strip {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .rating-big { font-family: "Fraunces", serif; font-size: 3.2rem; font-weight: 600; line-height: 1; }
+  .rating-strip .stars svg { width: 20px; height: 20px; }
+  .rating-meta { color: var(--ink-soft); font-size: 0.95rem; }
+
+  .review-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .review-card {
+    position: relative;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    padding: 24px 22px 20px;
+    box-shadow: 0 10px 22px -14px var(--shadow);
+  }
+  .review-card::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 22px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--brass);
+    box-shadow: 0 2px 4px var(--shadow);
+  }
+  .review-card:nth-child(1) { transform: rotate(-1deg); }
+  .review-card:nth-child(2) { transform: rotate(0.6deg); }
+  .review-card:nth-child(3) { transform: rotate(-0.4deg); }
+  .review-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .review-tags span {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    border-radius: 999px;
+  }
+  .review-quote { font-size: 1rem; margin-bottom: 16px; }
+  .review-who { font-family: "Fraunces", serif; font-size: 0.92rem; font-weight: 500; }
+  .review-who span { display: block; color: var(--ink-soft); font-family: "Source Serif 4", serif; font-weight: 400; font-size: 0.82rem; margin-top: 2px; }
+
+  .topic-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 34px; }
+  .topic-chip {
+    font-size: 0.85rem;
+    padding: 6px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+  }
+  .topic-chip b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Map / visit ---------- */
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .map-plate {
+    border: 1px solid var(--line);
+    aspect-ratio: 4/3;
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .map-plate svg { width: 100%; height: 100%; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: var(--green-deep);
+    color: var(--paper);
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: center; }
+  footer .brandmark { color: var(--paper); }
+  footer .brandmark svg circle { stroke: var(--paper); }
+  footer .brandmark svg path { stroke: var(--paper); }
+  footer small { color: color-mix(in srgb, var(--paper) 65%, transparent); font-size: 0.85rem; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid, .about-grid, .hours-panel, .visit-grid { grid-template-columns: 1fr; }
+    .sign-wrap { order: -1; margin-bottom: 8px; }
+    .sign-wrap svg { max-width: 240px; }
+    .review-cards { grid-template-columns: 1fr; }
+    section { padding: 48px 0; }
+    .hero { padding: 40px 0 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="brandmark">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" stroke="var(--ink)" stroke-width="1.4"/><path d="M10 20V13.5L16 9l6 4.5V20" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 20v-5h6v5" stroke="var(--ink)" stroke-width="1.4"/></svg>
+      Lost &amp; Found Treasures
+    </div>
+    <div class="nav-status">
+      <span class="dot" id="status-dot"></span>
+      <span id="status-text">Closed today</span>
+      <a class="btn-call" href="tel:+18575654848">(857) 565-4848</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero wrap" style="border-top:none;">
+  <div class="hero-grid">
+    <div>
+      <div class="kicker-row">
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+        </span>
+        4.4 from 29 visitors
+      </div>
+      <h1 class="shop-name">A little shop<br>for things that<br>found their way back.</h1>
+      <p class="lede">Lost &amp; Found Treasures is an antique store on Washington Street in Roslindale, stocked with hand-picked knick-knacks, ornamental pieces, and the odd toy collectible that shouldn't have survived this long — but did.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Lost+%26+Found+Treasures+4266+Washington+St+Boston+MA+02131" target="_blank" rel="noopener">Get directions</a>
+        <a class="btn btn-secondary" href="tel:+18575654848">Call the shop</a>
+      </div>
+      <div class="badge-row">
+        <span class="badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>Women-owned</span>
+        <span class="badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>LGBTQ+ friendly</span>
+        <span class="badge"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>Loyalty punch card</span>
+      </div>
+    </div>
+
+    <div class="sign-wrap" aria-hidden="true">
+      <svg viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+        <line x1="150" y1="0" x2="150" y2="38" stroke="var(--brass)" stroke-width="2"/>
+        <circle cx="150" cy="38" r="5" fill="var(--brass)"/>
+        <rect x="30" y="42" width="240" height="230" rx="4" fill="var(--paper-2)" stroke="var(--brass)" stroke-width="2.5"/>
+        <rect x="42" y="54" width="216" height="206" fill="none" stroke="var(--brass)" stroke-width="1" stroke-dasharray="2 5"/>
+        <!-- mantel clock motif -->
+        <g transform="translate(150,140)">
+          <path d="M-55 70 Q-55 -10 0 -30 Q55 -10 55 70 Z" fill="none" stroke="var(--green)" stroke-width="2.5"/>
+          <circle cx="0" cy="10" r="34" fill="var(--paper)" stroke="var(--green)" stroke-width="2.5"/>
+          <line x1="0" y1="10" x2="0" y2="-10" stroke="var(--ink)" stroke-width="2"/>
+          <line x1="0" y1="10" x2="14" y2="16" stroke="var(--ink)" stroke-width="2"/>
+          <circle cx="0" cy="10" r="2.4" fill="var(--ink)"/>
+          <circle cx="-30" cy="55" r="4" fill="var(--brass)"/>
+          <circle cx="30" cy="55" r="4" fill="var(--brass)"/>
+        </g>
+        <text x="150" y="300" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="17" fill="var(--ink-soft)">est. treasures, found daily</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="about-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:20px;">
+        <h2>What's inside</h2>
+      </div>
+      <div class="measure">
+        <p>Nothing in the shop is arranged to look older than it is, and nothing is sold in worse shape than it deserves. Visitors describe it as small but not cluttered — a tight, well-edited room of ornamental pieces, cultural finds, toy collectibles, and the newer things that earned a place next to them.</p>
+        <p>Every piece is chosen by hand rather than bought in bulk, which is the difference between a shop full of old junk and a shop full of things someone actually wanted to keep. Regulars carry a loyalty punch card, and the shelves turn over often enough that it's worth a second look every few weeks.</p>
+      </div>
+    </div>
+    <div class="services-panel">
+      <h3>Ways to shop</h3>
+      <ul class="services-list">
+        <li><svg viewBox="0 0 20 20"><path d="M4 8h12l-1 9a2 2 0 01-2 1.8H7A2 2 0 015 17L4 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 8V6a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><div>In-store shopping — browse the shelves in person, Wednesday through Sunday.</div></li>
+        <li><svg viewBox="0 0 20 20"><path d="M3 6l7-4 7 4-7 4-7-4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 6v8l7 4 7-4V6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><div>In-store pickup — reserve a find and collect it on your own schedule.</div></li>
+        <li><svg viewBox="0 0 20 20"><path d="M2 10h11v6H2z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M13 12h3l2 3v1h-5z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="16.5" r="1.4" fill="currentColor"/><circle cx="15" cy="16.5" r="1.4" fill="currentColor"/></svg><div>Delivery — for the pieces too good, or too heavy, to carry home.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="hours">
+  <div class="wrap hours-panel">
+    <div>
+      <div class="section-head" style="margin-bottom:20px;">
+        <h2>Shop hours</h2>
+        <p>Closed Monday and Tuesday for restocking and hunting new pieces.</p>
+      </div>
+      <table class="ledger" id="hours-table">
+        <tbody>
+          <tr data-day="1"><td>Monday</td><td>Closed</td></tr>
+          <tr data-day="2"><td>Tuesday</td><td>Closed</td></tr>
+          <tr data-day="3"><td>Wednesday</td><td>11:30 AM – 5:30 PM</td></tr>
+          <tr data-day="4"><td>Thursday</td><td>11:30 AM – 6:30 PM</td></tr>
+          <tr data-day="5"><td>Friday</td><td>11:30 AM – 6:30 PM</td></tr>
+          <tr data-day="6"><td>Saturday</td><td>11:30 AM – 6:30 PM</td></tr>
+          <tr data-day="0"><td>Sunday</td><td>11:00 AM – 3:30 PM</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="visit-card">
+      <div class="field">
+        <div class="label">Address</div>
+        4266 Washington St<br>Boston, MA 02131
+      </div>
+      <div class="field">
+        <div class="label">Phone</div>
+        <a href="tel:+18575654848">(857) 565-4848</a>
+      </div>
+      <div class="field">
+        <div class="label">Plus code</div>
+        7VPC+47 Boston, MA
+      </div>
+      <a class="btn btn-primary" style="width:100%; justify-content:center;" href="https://www.google.com/maps/search/?api=1&query=Lost+%26+Found+Treasures+4266+Washington+St+Boston+MA+02131" target="_blank" rel="noopener">Get directions</a>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What visitors find</h2>
+    </div>
+    <div class="rating-strip">
+      <span class="rating-big">4.4</span>
+      <span class="stars" aria-hidden="true">
+        <svg viewBox="0 0 20 20" fill="var(--brass)"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+        <svg viewBox="0 0 20 20" fill="var(--brass)"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+        <svg viewBox="0 0 20 20" fill="var(--brass)"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+        <svg viewBox="0 0 20 20" fill="var(--brass)"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+        <svg viewBox="0 0 20 20" fill="none" stroke="var(--brass)" stroke-width="1.3"><path d="M10 1l2.6 6 6.4.5-4.9 4.2 1.6 6.3L10 14.7 4.3 18l1.6-6.3L1 7.5 7.4 7z"/></svg>
+      </span>
+      <span class="rating-meta">29 reviews, most mentioning friendly staff and unique finds</span>
+    </div>
+
+    <div class="topic-strip">
+      <span class="topic-chip"><b>9</b> friendly staff</span>
+      <span class="topic-chip"><b>4</b> retro stuff</span>
+      <span class="topic-chip"><b>4</b> unique items</span>
+      <span class="topic-chip"><b>3</b> clothes</span>
+      <span class="topic-chip"><b>2</b> cute shop</span>
+      <span class="topic-chip"><b>2</b> specific items</span>
+    </div>
+
+    <div class="review-cards">
+      <div class="review-card">
+        <div class="review-tags"><span>knick-knacks</span><span>good condition</span></div>
+        <p class="review-quote">Very nice little shop. It's small but not overly cluttered — a lot of neat knick-knacks and antiques, plus some newer stuff, and everything felt like it was in good condition, not just old junk someone didn't want.</p>
+        <div class="review-who">Milo Rudy<span>Local Guide · 11 reviews</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-tags"><span>toy collectibles</span><span>well stocked</span></div>
+        <p class="review-quote">A charming and well-stocked thrift store housing some beautiful ornamental and cultural items, with a nice sprinkling of toy collectibles as well.</p>
+        <div class="review-who">Kyle Surr<span>1 review</span></div>
+      </div>
+      <div class="review-card">
+        <div class="review-tags"><span>great staff</span><span>top pick</span></div>
+        <p class="review-quote">One of the greatest antique shops I've been to — the owner is incredibly artistic, and the person at the counter was very, very helpful.</p>
+        <div class="review-who">Soham Gupta<span>6 reviews · 11 photos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap visit-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:18px;">
+        <h2>Find the shop</h2>
+        <p>On Washington Street in Roslindale, with in-store shopping, pickup, and delivery all on offer.</p>
+      </div>
+      <table class="ledger" style="max-width:360px;">
+        <tbody>
+          <tr><td>Address</td><td>4266 Washington St, Boston, MA 02131</td></tr>
+          <tr><td>Phone</td><td><a href="tel:+18575654848">(857) 565-4848</a></td></tr>
+          <tr><td>Plus code</td><td>7VPC+47 Boston</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="map-plate" aria-hidden="true">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="300" fill="var(--green-deep)"/>
+        <g stroke="var(--paper)" stroke-opacity="0.14" stroke-width="1">
+          <line x1="0" y1="60" x2="400" y2="40"/>
+          <line x1="0" y1="140" x2="400" y2="150"/>
+          <line x1="0" y1="230" x2="400" y2="210"/>
+          <line x1="90" y1="0" x2="60" y2="300"/>
+          <line x1="230" y1="0" x2="260" y2="300"/>
+          <line x1="330" y1="0" x2="360" y2="300"/>
+        </g>
+        <circle cx="200" cy="140" r="9" fill="var(--brass)"/>
+        <circle cx="200" cy="140" r="18" fill="none" stroke="var(--brass)" stroke-width="1.5"/>
+        <path d="M200 105 C 175 105 165 130 200 165 C 235 130 225 105 200 105 Z" fill="var(--rust)"/>
+        <circle cx="200" cy="120" r="7" fill="var(--green-deep)"/>
+        <text x="200" y="200" text-anchor="middle" fill="var(--paper)" fill-opacity="0.6" font-family="Fraunces, serif" font-style="italic" font-size="14">4266 Washington St</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brandmark">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="15" stroke="var(--paper)" stroke-width="1.4"/><path d="M10 20V13.5L16 9l6 4.5V20" stroke="var(--paper)" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 20v-5h6v5" stroke="var(--paper)" stroke-width="1.4"/></svg>
+      Lost &amp; Found Treasures
+    </div>
+    <small>4266 Washington St, Boston, MA 02131 · (857) 565-4848</small>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    try {
+      var now = new Date();
+      var day = now.getDay();
+      var hour = now.getHours() + now.getMinutes() / 60;
+      var hoursMap = {
+        1: null,
+        2: null,
+        3: [11.5, 17.5],
+        4: [11.5, 18.5],
+        5: [11.5, 18.5],
+        6: [11.5, 18.5],
+        0: [11, 15.5]
+      };
+      var range = hoursMap[day];
+      var dot = document.getElementById('status-dot');
+      var text = document.getElementById('status-text');
+      var isOpen = range && hour >= range[0] && hour < range[1];
+      if (isOpen) {
+        dot.classList.add('open');
+        text.textContent = 'Open now';
+      } else {
+        text.textContent = 'Closed now';
+      }
+      var rows = document.querySelectorAll('#hours-table tr');
+      rows.forEach(function (row) {
+        if (parseInt(row.getAttribute('data-day'), 10) === day) {
+          row.classList.add('today');
+        }
+      });
+    } catch (e) {}
+  })();
+</script>
+
+</body>
+</html>
